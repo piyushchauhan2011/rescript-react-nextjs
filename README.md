@@ -56,6 +56,14 @@ Trusted flags `DECISION_SEASONAL_OFFERS` and `DECISION_PLANNING_GUIDE` accept ab
 
 Production personalized documents require `private` with `no-cache` or stricter `no-store`; no shared page/snapshot cache is used. Proxy sets `private, no-cache`. Next 16.3.7 deliberately replaces this with `no-cache, must-revalidate` in its loopback-only development server, so document privacy verification targets production. Static images and `/image/(480|800|1280)/<local-name>.webp` remain publicly cacheable. Transforms use local storage only, WebP q72, seven-day caching, and return 404 for unsupported widths, traversal, and missing files.
 
+### Vercel: bundled read-only catalog
+
+Use the `apps/web` project root, Next.js framework, Node 24.x, and enable source files outside the root directory. `apps/web/vercel.json` installs the full workspace, migrates/seeds `apps/web/data/catalog.db` during the build, makes the file read-only, and runs the root Turbo build. The database is not under `public` and is never generated during a request.
+
+Set a private random `DECISION_COOKIE_SECRET` for Production and Preview; optional trusted flags retain the semantics above. Do not configure a machine-local `DB_FILE_NAME`. On Vercel, the default database path is `process.cwd()/data/catalog.db`; local commands retain repository-root path resolution and explicit database paths take precedence. The image handler uses `process.cwd()/public/images`. Next file tracing explicitly includes the catalog for home/index functions and local image originals for the transform function.
+
+Link the repository root with `vercel link`, then deploy with `vercel deploy --prod`. `.vercelignore` excludes local dependencies, generated compiler/build outputs, databases, environment files, and reports; Vercel generates its own Linux-native dependencies and compiler outputs. Catalog changes require a new deployment, not a writable volume. Verify home/index/Kyoto, `/image/480/hero-1280.webp`, private document caching, and public image caching after deploying.
+
 ## Code quality
 
 ```sh

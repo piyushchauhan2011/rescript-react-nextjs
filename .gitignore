@@ -10,3 +10,5 @@ local.db*
 test-results/
 playwright-report/
 reports/
+.vercel/
+apps/web/data/

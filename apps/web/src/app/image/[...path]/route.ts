@@ -4,7 +4,12 @@ import { repositoryRoot } from "../../../../../../scripts/db-path";
 
 export const runtime = "nodejs";
 const ipx = createIPX({
-  storage: ipxFSStorage({ dir: resolve(repositoryRoot, "apps/web/public/images") }),
+  storage: ipxFSStorage({
+    dir:
+      process.env.VERCEL === "1"
+        ? resolve(process.cwd(), "public/images")
+        : resolve(repositoryRoot, "apps/web/public/images"),
+  }),
 });
 
 export async function GET(request: Request): Promise<Response> {

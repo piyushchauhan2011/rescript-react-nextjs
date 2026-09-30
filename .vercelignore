@@ -1,0 +1,15 @@
+**/node_modules/**
+**/.next/**
+**/.turbo/**
+**/lib/**
+**/*.res.mjs
+**/*.gen.tsx
+**/*.tsbuildinfo
+**/.env*
+.git/**
+.vercel/**
+local.db*
+apps/web/data/**
+test-results/**
+playwright-report/**
+reports/**

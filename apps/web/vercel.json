@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
+  "buildCommand": "cd ../.. && mkdir -p apps/web/data && DB_FILE_NAME=\"$PWD/apps/web/data/catalog.db\" pnpm db:setup && chmod 0444 apps/web/data/catalog.db && pnpm build"
+}
