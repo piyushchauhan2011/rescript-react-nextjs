@@ -1,0 +1,48 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "agentGuidance": false,
+  "globalPassThroughEnv": [
+    "DB_FILE_NAME",
+    "DECISION_DISABLED_EXPERIMENTS",
+    "DECISION_SEASONAL_OFFERS",
+    "DECISION_PLANNING_GUIDE",
+    "DECISION_COOKIE_SECRET"
+  ],
+  "tasks": {
+    "//#res:build": {
+      "inputs": [
+        "rescript.json",
+        "packages/*/rescript.json",
+        "packages/*/package.json",
+        "packages/*/src/**/*.res",
+        "packages/*/src/**/*.resi",
+        "packages/*/src/**/*.shim.ts",
+        "!packages/*/src/**/*.res.mjs",
+        "!packages/*/src/**/*.gen.tsx"
+      ],
+      "outputs": ["packages/*/src/**/*.res.mjs", "packages/*/src/**/*.gen.tsx", "packages/*/lib/**"]
+    },
+    "//#res:dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "@repo/web#dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "@repo/web#build": {
+      "dependsOn": ["//#res:build"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "$TURBO_ROOT$/scripts/db-path.ts",
+        "!**/*.res.mjs",
+        "!**/*.gen.tsx"
+      ],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "@repo/web#typecheck": {
+      "dependsOn": ["//#res:build"],
+      "outputs": []
+    }
+  }
+}

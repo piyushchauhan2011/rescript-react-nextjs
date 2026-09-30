@@ -1,0 +1,132 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "react", "react-hooks", "jsx-a11y", "import", "unicorn", "nextjs"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "error"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2024": true
+  },
+  "settings": {
+    "next": {
+      "rootDir": ["apps/web/"]
+    }
+  },
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/.next/**",
+    "**/.turbo/**",
+    "**/lib/**",
+    "**/*.res.mjs",
+    "**/*.gen.tsx",
+    "**/next-env.d.ts",
+    "**/*.tsbuildinfo",
+    "test-results/**",
+    "playwright-report/**",
+    "pnpm-lock.yaml",
+    "drizzle/meta/**"
+  ],
+  "rules": {
+    "complexity": [
+      "error",
+      {
+        "max": 12
+      }
+    ],
+    "max-lines-per-function": [
+      "error",
+      {
+        "max": 90,
+        "skipBlankLines": true,
+        "skipComments": true
+      }
+    ],
+    "max-depth": [
+      "error",
+      {
+        "max": 3
+      }
+    ],
+    "max-params": [
+      "error",
+      {
+        "max": 4
+      }
+    ],
+    "max-nested-callbacks": [
+      "error",
+      {
+        "max": 3
+      }
+    ],
+    "max-classes-per-file": [
+      "error",
+      {
+        "max": 1
+      }
+    ],
+    "eqeqeq": ["error", "always"],
+    "curly": ["error", "all"],
+    "no-var": "error",
+    "prefer-const": "error",
+    "no-debugger": "error",
+    "no-console": [
+      "error",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "typescript/no-explicit-any": "error",
+    "typescript/consistent-type-imports": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "import/no-cycle": "error",
+    "import/no-unassigned-import": ["error", { "allow": ["**/*.css"] }],
+    "react/react-in-jsx-scope": "off"
+  },
+  "overrides": [
+    {
+      "files": ["tests/**/*.ts"],
+      "plugins": [
+        "typescript",
+        "react",
+        "react-hooks",
+        "jsx-a11y",
+        "import",
+        "unicorn",
+        "nextjs",
+        "vitest"
+      ],
+      "rules": {
+        "no-console": "error"
+      }
+    },
+    {
+      "files": ["tests/**/*.test.ts"],
+      "rules": {
+        "vitest/expect-expect": [
+          "error",
+          { "assertFunctionNames": ["expect", "expectCatalogError"] }
+        ]
+      }
+    },
+    {
+      "files": [
+        "tests/e2e/**/*.ts",
+        "scripts/verify-production.ts",
+        "scripts/audit-performance.mjs"
+      ],
+      "rules": { "no-await-in-loop": "off" }
+    },
+    {
+      "files": ["scripts/**/*.{ts,mjs}"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ]
+}

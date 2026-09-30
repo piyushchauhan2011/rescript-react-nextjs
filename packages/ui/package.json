@@ -1,0 +1,17 @@
+{
+  "name": "@repo/ui",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": "./src/*.gen.tsx"
+  },
+  "dependencies": {
+    "@repo/core": "workspace:*",
+    "@rescript/runtime": "12.3.1",
+    "@rescript/react": "0.15.0",
+    "react": "19.3.0"
+  },
+  "peerDependencies": {
+    "next": "16.3.7"
+  }
+}

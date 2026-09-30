@@ -1,0 +1,28 @@
+{
+  "name": "@repo/ui",
+  "namespace": "RegistryUi",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
+  "dependencies": ["@repo/core", "@rescript/react"],
+  "package-specs": {
+    "module": "esmodule",
+    "in-source": true
+  },
+  "suffix": ".res.mjs",
+  "jsx": {
+    "version": 4
+  },
+  "gentypeconfig": {
+    "module": "esmodule",
+    "moduleResolution": "bundler",
+    "shims": { "RegistryCore": "CoreNamespace" }
+  },
+  "warnings": {
+    "number": "+3+8+11+12+20+26+27+32+33+34+35+39",
+    "error": "+3+8+11+12+20+26+27+32+33+34+35+39"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "name": "rescript-registry",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.4.2",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "res:build": "rescript build",
+    "res:dev": "rescript watch",
+    "build": "turbo run build",
+    "dev": "pnpm res:build && turbo run res:dev dev",
+    "typecheck": "turbo run typecheck && tsc --noEmit",
+    "test": "pnpm res:build && vitest run",
+    "test:e2e": "pnpm res:build && playwright test",
+    "test:production": "pnpm res:build && tsx scripts/verify-production.ts",
+    "perf:audit": "node scripts/audit-performance.mjs",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx scripts/db-migrate.ts",
+    "db:seed": "tsx scripts/seed.ts",
+    "db:setup": "pnpm db:migrate && pnpm db:seed",
+    "lint:js": "oxlint . --deny-warnings",
+    "lint:fix": "oxlint . --fix --deny-warnings",
+    "res:lint": "pnpm res:build && node scripts/rescript-lint.mjs",
+    "res:format": "rescript format",
+    "res:format:check": "rescript format --check",
+    "lint": "pnpm lint:js && pnpm res:lint",
+    "format": "oxfmt --write . && pnpm res:format",
+    "format:check": "oxfmt --check . && pnpm res:format:check",
+    "quality": "pnpm format:check && pnpm lint && pnpm typecheck",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@repo/core": "workspace:*",
+    "@repo/ui": "workspace:*",
+    "@rescript/runtime": "12.3.1",
+    "better-sqlite3": "13.0.3",
+    "drizzle-orm": "0.45.3"
+  },
+  "devDependencies": {
+    "rescript": "12.3.1",
+    "turbo": "2.11.5",
+    "typescript": "6.0.3",
+    "vitest": "5.0.3",
+    "vite": "8.3.1",
+    "@playwright/test": "1.63.0",
+    "@types/node": "26.6.3",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "tsx": "4.23.15",
+    "drizzle-kit": "0.31.11",
+    "lighthouse": "13.5.0",
+    "@types/better-sqlite3": "9.6.0",
+    "oxlint": "1.86.0",
+    "oxfmt": "0.71.0",
+    "husky": "9.1.7",
+    "lint-staged": "17.6.0"
+  }
+}

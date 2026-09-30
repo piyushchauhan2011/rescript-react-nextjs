@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.turbo/
+**/lib/
+*.res.mjs
+*.gen.tsx
+*.tsbuildinfo
+local.db*
+.env*
+test-results/
+playwright-report/
+reports/

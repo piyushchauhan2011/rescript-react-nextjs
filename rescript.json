@@ -1,0 +1,22 @@
+{
+  "name": "rescript-registry",
+  "sources": [],
+  "dependencies": ["@repo/core", "@repo/ui"],
+  "package-specs": {
+    "module": "esmodule",
+    "in-source": true
+  },
+  "suffix": ".res.mjs",
+  "jsx": {
+    "version": 4
+  },
+  "gentypeconfig": {
+    "module": "esmodule",
+    "moduleResolution": "bundler",
+    "shims": { "RegistryCore": "CoreNamespace" }
+  },
+  "reanalyze": {
+    "analysis": ["dce"],
+    "transitive": true
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@repo/core",
+  "namespace": "RegistryCore",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
+  "package-specs": {
+    "module": "esmodule",
+    "in-source": true
+  },
+  "suffix": ".res.mjs",
+  "gentypeconfig": {
+    "module": "esmodule",
+    "moduleResolution": "bundler",
+    "shims": { "RegistryCore": "CoreNamespace" }
+  },
+  "warnings": {
+    "number": "+3+8+11+12+20+26+27+32+33+34+35+39",
+    "error": "+3+8+11+12+20+26+27+32+33+34+35+39"
+  }
+}
