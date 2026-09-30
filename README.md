@@ -96,4 +96,6 @@ TypeScript tests consume generated ReScript APIs. Unit suites cover registry own
 
 The performance audit requires an existing production build and seeded database. It starts/stops its own loopback Next server, pins defaults using trusted experiment disables and absent flags, and runs real Lighthouse audits of home/index. It prints score/FCP/LCP/TBT/CLS and saves timestamped HTML/JSON reports under `test-results/lighthouse/`; there is no flaky score threshold.
 
+Production builds enable Next's experimental `inlineCss` option: the existing `globals.css` import is emitted as inline styles rather than a render-blocking stylesheet request. Development keeps Next's normal stylesheet/HMR behavior. This removes the first-load CSS round trip but increases document size, duplicates styles in the React Server Component payload, and forfeits independent stylesheet caching. Keep the option under review when upgrading Next; compare Lighthouse reports rather than assuming a score improvement.
+
 `pnpm db:generate` generates Drizzle migrations; `pnpm db:migrate` applies the checked-in migration; `pnpm db:seed` upserts the reference catalog. The source reference repository is unchanged.
